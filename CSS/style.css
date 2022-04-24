@@ -258,9 +258,6 @@ body{
         padding: 12px 12px;
         height: 100%;
     }
-    .more_image{
-        margin-bottom: 20px;
-    }
     .more_info .more_title{
         align-items: flex-end;
         min-height: 40%;
