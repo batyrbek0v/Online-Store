@@ -67,9 +67,7 @@ function moreInfo(item) {
             </div>
          </div>
       </div>
-      <div class="back_btn_block">
-         <button class="back_btn" onclick="goBack()">Back</button>
-      </div>
+
    `
    console.log(item);
 }
