@@ -54,7 +54,7 @@ function moreInfo(item) {
             </div>
             <ul class="list">
                <li>Category: ${item.category}</li>
-               <li>Price: ${item.price}</li>
+               <li>Price: ${item.price}$</li>
                <li>Rate: ${item.rating.rate}</li>
                <li>Сount: ${item.rating.count} pieces</li>
             </ul>
@@ -83,6 +83,7 @@ function clickCart() {
       showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,
+      timerProgressBarColor:'red', 
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
