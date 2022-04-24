@@ -48,7 +48,53 @@ function moreInfo(item) {
          <div class="more_image">
             <img src="${item.image}">
          </div>
+         <div class="more_info">
+            <div class="more_title">
+               <h2>Category: ${item.title}</h2>
+            </div>
+            <ul class="list">
+               <li>Category: ${item.category}</li>
+               <li>Price: ${item.price}</li>
+               <li>Rate: ${item.rating.rate}</li>
+               <li>Сount: ${item.rating.count} pieces</li>
+            </ul>
+            <div class="list_footer">
+               <p>Description: ${item.description}</p>
+            </div>
+            <div class="more_cart">
+               <button class="cart_btn"  onclick="clickCart()"><i class="fas fa-cart-arrow-down"></i></button>
+               <button class="heart_btn"><i class="fas fa-heart"></i></button>
+            </div>
+         </div>
+      </div>
+      <div class="back_btn_block">
+         <button class="back_btn" onclick="goBack()">Back</button>
       </div>
    `
    console.log(item);
+}
+
+function clickCart() {
+   const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Product successfully added to cart in successfully!',
+      color:'white',
+      background:'#6b25b6'
+    })
+}
+
+function goBack() {
+   window.location.reload()
 }
