@@ -64,10 +64,14 @@ function moreInfo(item) {
             <div class="more_cart">
                <button class="cart_btn"  onclick="clickCart()"><i class="fas fa-cart-arrow-down"></i></button>
                <button class="heart_btn"><i class="fas fa-heart"></i></button>
+               <button class="back_btn" onclick="goBack()">Back</button>
             </div>
          </div>
       </div>
-
+      <div class="back_btn_block">
+         <button class="back_btn" onclick="goBack()">Back</button>
+      </div>
+         
    `
    console.log(item);
 }

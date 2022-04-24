@@ -157,6 +157,9 @@ body{
     gap: 5px;
     /* border: 1px solid red; */
 }
+.more_cart .back_btn{
+    display: none;
+}
 .cart_btn , .heart_btn{
     width: 20%;
     height: 90%;
@@ -243,6 +246,12 @@ body{
     .list_footer{
         padding: 0.75rem;
     }
+    .more_cart .back_btn{
+        display: block;
+    }
+    .back_btn{
+        display: none;
+    }
 }
 @media screen and (max-width:425px) {
     .more_info .more_title{
@@ -251,11 +260,10 @@ body{
     }
     .more_cart{
         min-height: 20%;
-        border: 1px solid black;
     }
-    .cart_btn , .heart_btn{
+    .cart_btn , .heart_btn , .back_btn{
         width: 50%;
-        height: 55%;
+        height: 50%;
     }
 
 }
@@ -264,9 +272,5 @@ body{
         min-height: 23%;
         padding: 0;
     }
-    .more_cart{
-        border: 1px solid black;
-    }
-
 }
 /* RESPONSIVE-END */
