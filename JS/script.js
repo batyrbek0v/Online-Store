@@ -1,7 +1,37 @@
 
-const BASE_URL = 'https://fakestoreapi.com/'
 const $container = document.querySelector('.container')
 const $wrapper = document.querySelector('.wrapper')
+const $navBarList = document.querySelector('.header_list')
+const $input = document.querySelector('.input')
+const $select = document.querySelector('.select')
+const $loader = document.querySelector('.loader')
+const $filter_title = document.querySelector('.filter_title')
+
+const RouteList = [
+   {
+      title:'All',
+		route:'all',
+	},
+	{
+      title:'Electronic',
+		route:'electronic',
+	},
+	{
+		title:'Jewelery',
+		route:'jewelery',
+	},
+	{
+      title:'Men',
+		route:"men`s clothing",
+	},
+	{
+      title:'Women',
+		route:"women`s clothing",
+	},
+]
+
+
+const BASE_URL = 'https://fakestoreapi.com/'
 
 function getRequest(endPoint, cb) {
    fetch(`${BASE_URL}${endPoint}`)
@@ -10,11 +40,65 @@ function getRequest(endPoint, cb) {
 }
 
 window.addEventListener('load', () => {
+   $loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>'
    getRequest('products', cb => {
       cardTemplate(cb)
       console.log(cb);
    })
+
+   const links = RouteList.map(({title,route}) => {
+      return RouteTemplate(title, route)
+   }).join('')
+   
+   $navBarList.innerHTML = links
 })
+
+
+$input.addEventListener('input', e => {
+   let value = e.target.value.toUpperCase()
+   let val = $select.value
+   if (val === 'All') {
+      getRequest(`products`, cb => {
+         const filtered = cb.filter(item => item.title.toUpperCase().includes(value))
+         cardTemplate(filtered)
+      })
+   }
+})
+
+function RouteTemplate(title, route){
+   return `
+      <li>
+         <a onclick="getlinkRoute('${route}')">${title}</a>
+      </li>
+   `
+}
+
+
+function getlinkRoute(route) {
+   if (route === 'all'){
+      getRequest(`products`, cb => {
+         cardTemplate(cb)
+      })
+   }else if(route === 'jewelery'){
+      getRequest(`products/category/jewelery`, cb => {
+         cardTemplate(cb)
+      })
+   }else if(route === 'electronic'){
+      getRequest(`products/category/electronics`, cb => {
+         cardTemplate(cb)
+      })
+   }else if(route === "men`s clothing"){
+      getRequest(`products/category/men's clothing`, cb => {
+         cardTemplate(cb)
+      })
+   }else if(route === "women`s clothing"){
+      getRequest(`products/category/women's clothing`, cb => {
+         cardTemplate(cb)
+      })
+   }
+}
+
+
 
 
 function cardTemplate(base) {
@@ -30,13 +114,14 @@ function cardTemplate(base) {
                </h3>
             </div>
             <div class="btn_block">
-               <button onclick="getRoute('${item.id}')" class="more_btn">More</button>
+               <button onclick="getRoute('${item.id}')" class="more_btn">Buy Now</button>
             </div>
          </div>
       `
    }).join('')
    $wrapper.innerHTML = newBase
 }
+
 function getRoute(id){
    getRequest(`products/${id}`, cb => {
       moreInfo(cb)
@@ -62,7 +147,7 @@ function moreInfo(item) {
                <p>Description: ${item.description}</p>
             </div>
             <div class="more_cart">
-               <button class="cart_btn"  onclick="clickCart()"><i class="fas fa-cart-arrow-down"></i></button>
+               <button class="cart_btn"  onclick="clickCart()"><i class="fas fa-shopping-cart"></i></button>
                <button class="heart_btn"><i class="fas fa-heart"></i></button>
                <button class="back_btn" onclick="goBack()">Back</button>
             </div>
@@ -83,7 +168,6 @@ function clickCart() {
       showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,
-      timerProgressBarColor:'red', 
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -93,8 +177,7 @@ function clickCart() {
     Toast.fire({
       icon: 'success',
       title: 'Product successfully added to cart in successfully!',
-      color:'white',
-      background:'#6b25b6'
+      color:'#6b25b6',
     })
 }
 
