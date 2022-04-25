@@ -29,15 +29,15 @@ const RouteList = [
 		route:"women`s clothing",
 	},
 ]
-
-
 const BASE_URL = 'https://fakestoreapi.com/'
+
 
 function getRequest(endPoint, cb) {
    fetch(`${BASE_URL}${endPoint}`)
       .then(r => r.json())
       .then(res => cb(res))
 }
+
 
 window.addEventListener('load', () => {
    $loader.innerHTML = '<div class="lds-ripple"><div></div><div></div></div>'
@@ -64,6 +64,7 @@ $input.addEventListener('input', e => {
       })
    }
 })
+
 
 function RouteTemplate(title, route){
    return `
@@ -99,8 +100,6 @@ function getlinkRoute(route) {
 }
 
 
-
-
 function cardTemplate(base) {
    const newBase = base.map(item => {
       return `
@@ -122,11 +121,14 @@ function cardTemplate(base) {
    $wrapper.innerHTML = newBase
 }
 
+
 function getRoute(id){
    getRequest(`products/${id}`, cb => {
       moreInfo(cb)
    })
- }
+}
+
+
 function moreInfo(item) {
    $container.innerHTML = `
       <div class="more_card">
@@ -161,6 +163,7 @@ function moreInfo(item) {
    console.log(item);
 }
 
+
 function clickCart() {
    const Toast = Swal.mixin({
       toast: true,
@@ -180,6 +183,7 @@ function clickCart() {
       color:'#6b25b6',
     })
 }
+
 
 function goBack() {
    window.location.reload()
