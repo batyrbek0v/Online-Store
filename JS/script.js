@@ -6,7 +6,7 @@ const $input = document.querySelector('.input')
 const $select = document.querySelector('.select')
 const $loader = document.querySelector('.loader')
 const $filter_title = document.querySelector('.filter_title')
-
+const $adaptive_list = document.querySelector('.adaptive_list')
 const RouteList = [
    {
       title:'All',
@@ -31,7 +31,6 @@ const RouteList = [
 ]
 const BASE_URL = 'https://fakestoreapi.com/'
 
-
 function getRequest(endPoint, cb) {
    fetch(`${BASE_URL}${endPoint}`)
       .then(r => r.json())
@@ -51,6 +50,7 @@ window.addEventListener('load', () => {
    }).join('')
    
    $navBarList.innerHTML = links
+   $adaptive_list.innerHTML = links
 })
 
 
